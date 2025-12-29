@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Analyser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Strength Analyser</h1>
+        <h6>Designed by K. Molefe</h6>
+        <div class="input-group">
+            <input 
+                type="password" 
+                id="password" 
+                placeholder="Enter your password"
+                autocomplete="off"
+            >
+            <button class="toggle-password" id="togglePassword">Show</button>
+        </div>
+        
+        <div class="strength-meter">
+            <div class="strength-fill" id="strengthFill"></div>
+        </div>
+        
+        <div class="strength-label" id="strengthLabel">No Password</div>
+        
+        <div class="criteria">
+            <div class="criterion" id="length">
+                <div class="indicator">✓</div>
+                <span>8+ characters</span>
+            </div>
+            <div class="criterion" id="uppercase">
+                <div class=" indicator">✓</div>
+                <span>Uppercase letter</span>
+            </div>
+            <div class="criterion" id="lowercase">
+                <div class="indicator">✓</div>
+                <span>Lowercase letter</span>
+            </div>
+            <div class="criterion" id="number">
+                <div class="indicator">✓</div>
+                <span>Number</span>
+            </div>
+            <div class="criterion" id="special">
+                <div class="indicator">✓</div>
+                <span>Special character</span>
+            </div>
+            <div class="criterion" id="consecutive">
+                <div class="indicator">✓</div>
+                <span>No repeated chars</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
