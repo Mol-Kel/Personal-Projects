@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profitability Diagnostic Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="PDTstyles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Profitability Diagnostic Tool</h1>
+            <p class="subtitle">Analyze your business financial health, identify profit drivers, and discover optimization opportunities with this comprehensive diagnostic tool.</p>
+            <h6>By K. Molefe</h6>
+        </header>
+
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Revenue Analysis</h2>
+                    <div class="card-icon revenue-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="totalRevenue"><i class="fas fa-chart-bar"></i> Total Revenue ($)</label>
+                    <input type="number" id="totalRevenue" value="150000" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="recurringRevenue"><i class="fas fa-sync-alt"></i> Recurring Revenue (%)</label>
+                    <input type="number" id="recurringRevenue" value="45" min="0" max="100">
+                </div>
+                <div class="input-group">
+                    <label for="growthRate"><i class="fas fa-trend-up"></i> YoY Growth Rate (%)</label>
+                    <input type="number" id="growthRate" value="12" min="-100" max="1000">
+                </div>
+                <div class="input-group">
+                    <label for="customerCount"><i class="fas fa-users"></i> Active Customers</label>
+                    <input type="number" id="customerCount" value="1250" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="avgRevenue"><i class="fas fa-receipt"></i> Avg. Revenue Per Customer ($)</label>
+                    <input type="number" id="avgRevenue" value="120" min="0">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Cost Analysis</h2>
+                    <div class="card-icon cogs-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="cogs"><i class="fas fa-truck-loading"></i> Cost of Goods Sold ($)</label>
+                    <input type="number" id="cogs" value="65000" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="opex"><i class="fas fa-building"></i> Operating Expenses ($)</label>
+                    <input type="number" id="opex" value="55000" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="marketingSpend"><i class="fas fa-bullhorn"></i> Marketing Spend ($)</label>
+                    <input type="number" id="marketingSpend" value="18000" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="rdSpend"><i class="fas fa-lightbulb"></i> R&D Spend ($)</label>
+                    <input type="number" id="rdSpend" value="12000" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="employeeCount"><i class="fas fa-user-friends"></i> Full-time Employees</label>
+                    <input type="number" id="employeeCount" value="15" min="1">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Profitability Settings</h2>
+                    <div class="card-icon profit-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="taxRate"><i class="fas fa-percentage"></i> Tax Rate (%)</label>
+                    <input type="number" id="taxRate" value="25" min="0" max="100" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label for="interestExpenses"><i class="fas fa-hand-holding-usd"></i> Interest Expenses ($)</label>
+                    <input type="number" id="interestExpenses" value="5000" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="otherIncome"><i class="fas fa-gift"></i> Other Income ($)</label>
+                    <input type="number" id="otherIncome" value="3500" min="0" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="industry"><i class="fas fa-industry"></i> Industry Benchmark</label>
+                    <select id="industry">
+                        <option value="retail">Retail</option>
+                        <option value="manufacturing" selected>Manufacturing</option>
+                        <option value="software">Software/SaaS</option>
+                        <option value="services">Professional Services</option>
+                        <option value="healthcare">Healthcare</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="businessSize"><i class="fas fa-layer-group"></i> Business Size</label>
+                    <select id="businessSize">
+                        <option value="small">Small (1-50 employees)</option>
+                        <option value="medium" selected>Medium (51-250 employees)</option>
+                        <option value="large">Large (251+ employees)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" id="analyzeBtn">
+                <i class="fas fa-search-dollar"></i> Analyze Profitability
+            </button>
+            <button class="btn btn-outline" id="resetBtn">
+                <i class="fas fa-redo"></i> Reset Values
+            </button>
+        </div>
+
+        <div class="metric-cards" id="metricCards" style="display: none;">
+            <div class="metric-card">
+                <div class="metric-label">Gross Profit</div>
+                <div class="metric-value gross-profit" id="grossProfit">$85,000</div>
+                <div class="metric-label">56.7% Margin</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Operating Profit</div>
+                <div class="metric-value operating-profit" id="operatingProfit">$30,000</div>
+                <div class="metric-label">20.0% Margin</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Net Profit</div>
+                <div class="metric-value net-profit" id="netProfit">$19,875</div>
+                <div class="metric-label">13.3% Margin</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Profit Per Employee</div>
+                <div class="metric-value" id="profitPerEmployee">$1,325</div>
+                <div class="metric-label">Annual Value</div>
+            </div>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Profitability Breakdown</h2>
+                    <div class="card-icon profit-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="profitChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Cost Distribution</h2>
+                    <div class="card-icon cogs-icon">
+                        <i class="fas fa-chart-doughnut"></i>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="scenario-section" id="scenarioSection" style="display: none;">
+            <div class="card scenario-card">
+                <div class="card-header">
+                    <h2 class="card-title">Break-Even Analysis</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                </div>
+                <p>Based on your current cost structure:</p>
+                <ul>
+                    <li><strong>Break-Even Revenue:</strong> <span id="breakEvenRevenue">$108,333</span></li>
+                    <li><strong>Break-Even Customers:</strong> <span id="breakEvenCustomers">903</span></li>
+                    <li><strong>Monthly Target:</strong> <span id="monthlyTarget">$9,028</span></li>
+                </ul>
+                <div class="recommendations">
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div>Reducing COGS by 10% would lower your break-even point to $97,500 in revenue</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card scenario-card">
+                <div class="card-header">
+                    <h2 class="card-title">Growth Projections</h2>
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                <p>With 15% annual growth over 3 years:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Revenue</th>
+                            <th>Net Profit</th>
+                            <th>Margin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Current</td>
+                            <td id="currentRevenue">$150,000</td>
+                            <td id="currentProfit">$19,875</td>
+                            <td>13.3%</td>
+                        </tr>
+                        <tr>
+                            <td>+1 Year</td>
+                            <td id="year1Revenue">$172,500</td>
+                            <td id="year1Profit">$28,219</td>
+                            <td>16.4%</td>
+                        </tr>
+                        <tr>
+                            <td>+3 Years</td>
+                            <td id="year3Revenue">$228,131</td>
+                            <td id="year3Profit">$48,891</td>
+                            <td>21.4%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card insights-card" id="insightsCard" style="display: none;">
+            <div class="card-header">
+                <h2 class="card-title">Key Insights & Recommendations</h2>
+                <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                    <i class="fas fa-brain" style="color: white;"></i>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-title">
+                    <i class="fas fa-check-circle" style="color: #4ade80;"></i>
+                    <span>Strength: Healthy Gross Margin</span>
+                </div>
+                <p>Your gross profit margin of 56.7% exceeds the manufacturing industry average of 40-45%, indicating efficient production and strong pricing power.</p>
+            </div>
+            
+            <div class="insight-item highlight">
+                <div class="insight-title">
+                    <i class="fas fa-exclamation-triangle" style="color: #fbbf24;"></i>
+                    <span>Opportunity: Optimize Operating Expenses</span>
+                </div>
+                <p>Operating expenses at 36.7% of revenue are 10% higher than industry benchmarks. Focusing on marketing efficiency could significantly improve bottom-line profitability.</p>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-title">
+                    <i class="fas fa-bolt" style="color: #38bdf8;"></i>
+                    <span>Action: Revenue Diversification</span>
+                </div>
+                <p>With only 45% recurring revenue, implementing subscription models could stabilize cash flow and improve customer lifetime value by an estimated 25-30%.</p>
+            </div>
+            
+            <div class="recommendations">
+                <h3 style="margin-bottom: 10px; color: white;"><i class="fas fa-star"></i> Top 3 Optimization Opportunities</h3>
+                <div class="recommendation-item">
+                    <div class="recommendation-icon"><i class="fas fa-arrow-down"></i></div>
+                    <div>Reduce marketing cost per acquisition by 15% through targeted digital campaigns</div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-icon"><i class="fas fa-arrow-up"></i></div>
+                    <div>Increase average transaction value by implementing bundling strategies</div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-icon"><i class="fas fa-cogs"></i></div>
+                    <div>Negotiate better terms with top 3 suppliers to reduce COGS by 5-7%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Profitability Diagnostic Tool &copy; 2025 | Data is processed locally in your browser - no information is stored or shared</p>
+        <p><i class="fas fa-shield-alt"></i> Your financial data remains completely private and secure</p>
+    </footer>
+
+    <script src="PDTscript.js"></script>
+</body>
+</html>
