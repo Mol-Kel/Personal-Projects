@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Cause Analysis Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Root Cause Analysis Engine</h1>
+            <p>Systematically identify and analyze the root causes of problems</p>
+            <br>
+            <h6>Designed by K. Molefe</h6>
+        </div>
+
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('5whys')">5 Whys Analysis</button>
+                <button class="tab" onclick="switchTab('fishbone')">Fishbone Diagram</button>
+                <button class="tab" onclick="switchTab('report')">Analysis Report</button>
+            </div>
+
+            <!-- 5 Whys Tab -->
+            <div id="5whys" class="tab-content active">
+                <div class="section">
+                    <div class="section-title">Problem Statement</div>
+                    <div class="input-group">
+                        <label for="problem">What is the problem you're investigating?</label>
+                        <textarea id="problem" placeholder="Describe the problem in detail..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">5 Whys Analysis</div>
+                    <div class="whys-container" id="whysContainer">
+                        <div class="why-item">
+                            <div class="why-number">Why #1: Why did this problem occur?</div>
+                            <input type="text" id="why1" placeholder="Enter the first 'why'...">
+                        </div>
+                        <div class="why-item">
+                            <div class="why-number">Why #2: Why did that happen?</div>
+                            <input type="text" id="why2" placeholder="Enter the second 'why'...">
+                        </div>
+                        <div class="why-item">
+                            <div class="why-number">Why #3: Why did that happen?</div>
+                            <input type="text" id="why3" placeholder="Enter the third 'why'...">
+                        </div>
+                        <div class="why-item">
+                            <div class="why-number">Why #4: Why did that happen?</div>
+                            <input type="text" id="why4" placeholder="Enter the fourth 'why'...">
+                        </div>
+                        <div class="why-item">
+                            <div class="why-number">Why #5: Why did that happen?</div>
+                            <input type="text" id="why5" placeholder="Enter the fifth 'why'...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <button class="btn" onclick="analyzeWhys()">Analyze Root Cause</button>
+                    <button class="btn btn-secondary" onclick="clearWhys()">Clear</button>
+                </div>
+            </div>
+
+            <!-- Fishbone Tab -->
+            <div id="fishbone" class="tab-content">
+                <div class="section">
+                    <div class="section-title">Fishbone Diagram (Ishikawa)</div>
+                    <div class="input-group">
+                        <label for="effect">Effect (Problem):</label>
+                        <input type="text" id="effect" placeholder="What is the effect or problem?">
+                    </div>
+
+                    <div class="category-inputs">
+                        <div class="input-group">
+                            <label for="people">People:</label>
+                            <input type="text" id="people" placeholder="Human-related factors">
+                        </div>
+                        <div class="input-group">
+                            <label for="process">Process:</label>
+                            <input type="text" id="process" placeholder="Process-related factors">
+                        </div>
+                        <div class="input-group">
+                            <label for="equipment">Equipment:</label>
+                            <input type="text" id="equipment" placeholder="Equipment-related factors">
+                        </div>
+                        <div class="input-group">
+                            <label for="materials">Materials:</label>
+                            <input type="text" id="materials" placeholder="Material-related factors">
+                        </div>
+                        <div class="input-group">
+                            <label for="environment">Environment:</label>
+                            <input type="text" id="environment" placeholder="Environmental factors">
+                        </div>
+                        <div class="input-group">
+                            <label for="management">Management:</label>
+                            <input type="text" id="management" placeholder="Management-related factors">
+                        </div>
+                    </div>
+
+                    <button class="btn" onclick="drawFishbone()" style="margin-top: 20px;">Generate Diagram</button>
+                    <canvas id="fishboneCanvas" class="fishbone-canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Report Tab -->
+            <div id="report" class="tab-content">
+                <div class="section">
+                    <div class="section-title">Complete Analysis Report</div>
+                    <div class="results" id="results">
+                        <h3>📊 Root Cause Analysis Summary</h3>
+                        <div id="reportContent"></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Corrective Actions</div>
+                    <div class="input-group">
+                        <label for="actions">What actions will you take to address the root cause?</label>
+                        <textarea id="actions" placeholder="List corrective actions..."></textarea>
+                    </div>
+                    <button class="btn" onclick="addActions()">Add to Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
